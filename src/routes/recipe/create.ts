@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { validateRequest } from "../middlewares/validate-request";
-import { Recipe } from "../models/recipe";
+import { validateRequest } from "../../middlewares/validate-request";
+import { Recipe } from "../../models/recipe";
 
 const router = express.Router();
 
@@ -10,6 +10,10 @@ router.post(
   [
     body("title").notEmpty().withMessage("Title is required"),
     body("description").notEmpty().withMessage("Description is required"),
+    body("ingredients")
+      .notEmpty()
+      .isArray()
+      .withMessage("Ingredients are required"),
     body("ingredients.*.name")
       .notEmpty()
       .withMessage("Ingredient name is required"),
