@@ -24,8 +24,14 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { title, description, ingredients, steps } = req.body;
-    const recipe = Recipe.build({ title, description, ingredients, steps });
+    const { title, description, link, ingredients, steps } = req.body;
+    const recipe = Recipe.build({
+      title,
+      description,
+      link,
+      ingredients,
+      steps,
+    });
     await recipe.save();
 
     res.status(201).send(recipe);

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 interface RecipeAttrs {
   title: string;
   description: string;
+  link: string;
   ingredients: {
     name: string;
     amount: string;
@@ -13,6 +14,7 @@ interface RecipeAttrs {
 interface RecipeDoc extends mongoose.Document {
   title: string;
   description: string;
+  link: string;
   ingredients: {
     name: string;
     amount: string;
@@ -33,6 +35,9 @@ const recipeSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
+    },
+    link: {
+      type: String,
     },
     ingredients: {
       type: [

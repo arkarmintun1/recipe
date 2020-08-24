@@ -14,7 +14,7 @@ router.put(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
-    const { title, description, ingredients, steps } = req.body;
+    const { title, description, link, ingredients, steps } = req.body;
 
     const recipe = await Recipe.findById(req.params.recipeId);
     if (!recipe) {
@@ -24,6 +24,7 @@ router.put(
     recipe.set({
       title: title ? title : recipe.title,
       description: description ? description : recipe.description,
+      link: link ? link : recipe.link,
       ingredients: ingredients ? ingredients : recipe.ingredients,
       steps: steps ? steps : recipe.steps,
     });
