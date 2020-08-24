@@ -7,6 +7,7 @@ interface RecipeAttrs {
   ingredients: {
     name: string;
     amount: string;
+    note: string;
   }[];
   steps: string[];
 }
@@ -18,6 +19,7 @@ interface RecipeDoc extends mongoose.Document {
   ingredients: {
     name: string;
     amount: string;
+    note: string;
   }[];
   steps: string[];
 }
@@ -49,6 +51,9 @@ const recipeSchema = new mongoose.Schema(
           amount: {
             type: String,
             required: true,
+          },
+          note: {
+            type: String,
           },
         },
       ],
