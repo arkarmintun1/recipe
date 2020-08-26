@@ -10,6 +10,7 @@ import { indexRecipeRouter } from "./routes/recipe";
 import { updateRecipeRouter } from "./routes/recipe/update";
 import { deleteRecipeRouter } from "./routes/recipe/delete";
 import { registerUserRouter } from "./routes/user/register";
+import { loginUserRouter } from "./routes/user/login";
 
 const app = express();
 app.use(helmet());
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(registerUserRouter);
+app.use(loginUserRouter);
 
 app.use(indexRecipeRouter);
 app.use(createRecipeRouter);
