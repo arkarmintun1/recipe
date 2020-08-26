@@ -1,6 +1,7 @@
 import express from "express";
 import "express-async-errors";
-import { json } from "body-parser";
+import cors from "cors";
+import helmet from "helmet";
 import { NotFoundError } from "./errors/not-found-error";
 import { errorHandler } from "./middlewares/error-handler";
 import { createRecipeRouter } from "./routes/recipe/create";
@@ -8,9 +9,15 @@ import { readRecipeRouter } from "./routes/recipe/read";
 import { indexRecipeRouter } from "./routes/recipe";
 import { updateRecipeRouter } from "./routes/recipe/update";
 import { deleteRecipeRouter } from "./routes/recipe/delete";
+import { registerUserRouter } from "./routes/user/register";
 
 const app = express();
-app.use(json());
+app.use(helmet());
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(registerUserRouter);
 
 app.use(indexRecipeRouter);
 app.use(createRecipeRouter);
