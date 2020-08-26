@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { param } from "express-validator";
 import { validateRequest } from "../../middlewares/validate-request";
 import { Recipe } from "../../models/recipe";
-import { NotFoundError } from "../../errors/not-found-error";
+import { BadRequestError } from "../../errors/bad-request-error";
 
 const router = express.Router();
 
@@ -15,8 +15,9 @@ router.delete(
   validateRequest,
   async (req: Request, res: Response) => {
     const recipe = await Recipe.findById(req.params.recipeId);
+
     if (!recipe) {
-      throw new NotFoundError();
+      throw new BadRequestError("Recipe not found!");
     }
 
     await recipe.remove();
