@@ -5,12 +5,22 @@ interface UserAttrs {
   username: string;
   email: string;
   password: string;
+  avatar: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  address: string;
 }
 
 interface UserDoc extends mongoose.Document {
   username: string;
   email: string;
   password: string;
+  avatar: string;
+  first_name: string;
+  last_name: string;
+  phone: string;
+  address: string;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -31,6 +41,25 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
+    },
+    avatar: {
+      type: String,
+    },
+    first_name: {
+      type: String,
+      default: "",
+    },
+    last_name: {
+      type: String,
+      default: "",
+    },
+    phone: {
+      type: String,
+      default: "",
+    },
+    address: {
+      type: String,
+      default: "",
     },
     level: {
       type: String,
