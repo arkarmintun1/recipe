@@ -35,20 +35,31 @@ router.post(
     );
 
     if (!passwordMatch) {
-      throw new BadRequestError("Invalid credentials");
+      if (existingUser.status != "not_activated") {
+        const token = jwt.sign(
+          {
+            id: existingUser.id,
+            level: existingUser.level,
+            email: existingUser.email,
+          },
+          process.env.JWT_KEY!
+        );
+
+        res
+          .status(200)
+          .json({ result: "success", token, message: "Login Successfully." });
+      } else {
+        return res.status(200).json({
+          result: "error",
+          message: "You need to activate account first.",
+        });
+      }
+    } else {
+      return res.status(200).json({
+        result: "error",
+        message: "You need to activate account first.",
+      });
     }
-
-    const token = jwt.sign(
-      {
-        id: existingUser.id,
-        email: existingUser.email,
-      },
-      process.env.JWT_KEY!
-    );
-
-    res
-      .status(200)
-      .send({ result: "success", token, message: "Login Successfully" });
   }
 );
 

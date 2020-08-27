@@ -18,6 +18,7 @@
   "author": "Arkar Min Tun",
   "license": "ISC",
   "dependencies": {
+    "@sendgrid/mail": "^7.2.4",
     "@types/express": "^4.17.7",
     "@types/formidable": "^1.0.31",
     "@types/fs-extra": "^9.0.1",

@@ -5,11 +5,14 @@ interface UserAttrs {
   username: string;
   email: string;
   password: string;
-  avatar: string;
-  first_name: string;
-  last_name: string;
-  phone: string;
-  address: string;
+  avatar?: string;
+  first_name?: string;
+  last_name?: string;
+  phone?: string;
+  address?: string;
+  level?: string;
+  status?: string;
+  activated_token: string;
 }
 
 interface UserDoc extends mongoose.Document {
@@ -21,6 +24,9 @@ interface UserDoc extends mongoose.Document {
   last_name: string;
   phone: string;
   address: string;
+  level: string;
+  status: string;
+  activated_token: string;
 }
 
 interface UserModel extends mongoose.Model<UserDoc> {
@@ -64,6 +70,14 @@ const userSchema = new mongoose.Schema(
     level: {
       type: String,
       default: "normal",
+    },
+    status: {
+      type: String,
+      default: "not_activated",
+    },
+    activated_token: {
+      type: String,
+      default: "",
     },
     created: {
       type: Date,
